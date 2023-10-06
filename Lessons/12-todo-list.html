@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo List</title>
+
+
+  </head>
+  <body>
+    <p>Todo List Practice 1</p>
+    <input placeholder="Todo name" class="js-name-input">
+    <button onclick="addTodo();">Add</button>
+
+    <input type="date" class="js-due-date-input">
+
+  <div class="js-todo-list"></div>
+
+  
+   <script>
+    const todoList = [{
+      name:'make dinner', 
+      dueDate: '10-2-23'
+    }, {
+      name: 'wash dishes',
+      dueDate: '10-2-23'
+    }];
+
+    renderTodoList();
+
+    function renderTodoList() {
+      let todoListHTML = '';
+
+      todoList.forEach((todoObject, index) => {
+        const{ name, dueDate } = todoObject;
+        const html = `
+              <p>
+              ${name} ${dueDate} 
+              <button onclick="
+                todoList.splice(${index}, 1);
+                renderTodoList();
+              ">Delete</button>
+              </p>
+            `;
+          todoListHTML += html
+      });
+
+      document.querySelector('.js-todo-list')
+      .innerHTML = todoListHTML
+  };
+
+    function addTodo() {
+      const inputElement = document.querySelector('.js-name-input');
+      const name = inputElement.value
+      
+      const dateInputElement = 
+        document.querySelector('.js-due-date-input');
+
+      const dueDate = dateInputElement.value;
+      todoList.push({
+        //name: name,
+        //dueDate: dueDate
+        name,
+        dueDate
+      });
+    
+
+      inputElement.value = '';
+
+      renderTodoList();
+    };
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
